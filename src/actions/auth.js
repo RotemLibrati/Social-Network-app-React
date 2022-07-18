@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from './alert';
-import { REGISTER_SECCUSS, LOGOUT, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SECCESS } from "./types";
+import { REGISTER_SECCUSS, LOGOUT, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SECCESS, CLEAR_PROFILE } from "./types";
 import setAuthToken from '../utils/setAuthToken';
 //Load user
 
@@ -57,7 +57,6 @@ export const login = (email, password) => async dispatch => {
     }
     const body = JSON.stringify({ email, password});
     try {
-        console.log(email, password);
         const res = await axios.post('/api/auth', body, config);
         dispatch({
             type: LOGIN_SECCESS,
@@ -79,6 +78,10 @@ export const login = (email, password) => async dispatch => {
 //Logout
 export const logout = () => dispatch => {
     dispatch({
+        type: CLEAR_PROFILE
+    });
+    dispatch({
         type: LOGOUT
     });
+    
 }
